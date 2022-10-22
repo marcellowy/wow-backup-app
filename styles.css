@@ -1,0 +1,75 @@
+/* styles.css */
+
+/* Add styles here to customize the appearance of your app */
+body{
+    /* background: #ccc; */
+}
+.container-full {
+    height: 100%;
+    width: 100%;
+    padding-top: 20px;
+}
+
+.box {
+    /* background: #FFF; */
+    box-shadow: 2px 2px 10px rgb(223, 223, 223);
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+    /* padding: 0 20px; */
+}
+
+.box-game-directory {
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.box-choose-server {
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.box-choose-server div {
+    text-align: center;
+}
+
+.box-choose-server div input {
+    width: 200px;
+}
+.box-avatar {
+    padding: 20px 0;
+    display: none;
+    /* visibility: hidden;
+    height: 0; */
+}
+.box-avatar .left {
+    text-align: right;
+}
+.box-avatar .right { padding-top: 23px;}
+.box-avatar .img img{
+    height: 75px;
+    width: 75px;
+}
+
+.box-avatar-unlogin {
+    padding: 20px 0;
+    display: none;
+}
+.box-avatar-unlogin .login {
+    text-align: center;
+}
+
+.box-backup {
+    width: 80%;
+    padding: 20px 0;
+    /* display: flex; */
+    /* flex-direction: row; */
+    /* justify-content: center; */
+    /* align-items: center; */
+}
