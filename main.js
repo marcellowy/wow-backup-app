@@ -22,7 +22,7 @@ function createWindow () {
     // frame: false, // 隐藏标题栏
     // titleBarStyle: 'hiddenInset', // 隐藏标题栏,但不隐藏砑角的关闭按钮
     // resizable: false,
-    width: 1024,
+    width: 1200,
     height: 800,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),

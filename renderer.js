@@ -33,22 +33,25 @@ function srefresh(){
         clearTimeout(timer);
         var event = event || window.event;
         var keycode = event.keyCode || event.which;
-        if(keycode == 116){
-            alert('触发F5按键');
+        // 禁用F5
+        // 禁用ctrl+R
+        // 禁用command+R
+        if(keycode == 116 || (event.ctrlKey && keycode==82) || (event.metaKey && keycode == 82)){
+            // alert('触发F5按键');
             if(event.preventDefault){//chrome、firefox、IE9+
                 event.preventDefault();
             }else{//IE8-
                 event.keyCode = 0;
                 event.returnValue = false;
             }
-            timer = setTimeout(function(){
-                alert('恢复刷新');
-                if(document.removeEventListener){
-                    document.removeEventListener('keydown',shieldRefresh);
-                }else{
-                    document.detachEvent('onkeydown',shieldRefresh);
-                }
-            }, 3000);
+            // timer = setTimeout(function(){
+            //     alert('恢复刷新');
+            //     if(document.removeEventListener){
+            //         document.removeEventListener('keydown',shieldRefresh);
+            //     }else{
+            //         document.detachEvent('onkeydown',shieldRefresh);
+            //     }
+            // }, 3000);
         }
     }
 }
@@ -276,7 +279,7 @@ g("nav-profile-tab").addEventListener('show.bs.tab', async () => {
 
     showModal()
 
-    window.electronAPI.GetBackupFromServer(DEFAULT_GAME_DIRECTORY).then((ret) => {
+    window.electronAPI.GetBackupFromServer(DEFAULT_GAME).then((ret) => {
         let htmlTr = '';
         if(ret.code == 0 && ret.data.length >0 ) {
             // 获取数据成功 
@@ -349,7 +352,7 @@ g("ready").addEventListener('click', async () => {
     showModal()
 
     // 处理结果由主线程通知，不在这里处理
-    window.electronAPI.CompressBackup(DEFAULT_GAME_DIRECTORY, data.flag)
+    window.electronAPI.CompressBackup(DEFAULT_GAME, data.flag)
 })
 
 // 登录

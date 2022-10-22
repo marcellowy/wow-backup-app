@@ -4,7 +4,8 @@
   "description": "A wow backup tool help manage account config or addons and fonts",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "pck":"npx electron-packager . test.app --platform=darwin --arch=x64"
   },
   "repository": "https://github.com/marcellowy/wow-backup-app.git",
   "keywords": [
