@@ -136,6 +136,17 @@ window.electronAPI.HandleUnzip((event, ret) => {
     }
 })
 
+// 执行更新大脚命令,等待主线程通知执行结果
+window.electronAPI.HandleUpdateBigFoot((event, ret) => {
+    console.log( ret)
+    if(ret.code == 0) {
+        // 更新成功
+        autoModal("更新成功")
+    } else {
+        autoModal("更新失败")
+    }
+})
+
 // 以上是接收主线程通知方法
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -420,3 +431,15 @@ async function DeleteBackup() {
         hideModal()
     }
 }
+
+// 点击更新大脚
+g("updateBigFoot").addEventListener('click', async () => {
+    showModal()
+    //bigFootUpdateURL
+    let val = g("bigFootUpdateURL").value;
+    if (val == "") {
+        autoModal("下载地址不能为空")
+        return
+    }
+    await window.electronAPI.UpdateBigFoot(DEFAULT_GAME, val)
+})

@@ -24,6 +24,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   HandleBackupUpload: (callback) => ipcRenderer.on('backup-upload', callback),
   HandleCompress: (callback) => ipcRenderer.on('backup-compress', callback),
   HandleUnzip:(callback) => ipcRenderer.on('backup-unzip', callback),
+  HandleUpdateBigFoot:(callback) => ipcRenderer.on('update-bigfoot', callback),
 
   ChooseDirectory: (game) => ipcRenderer.invoke('ChooseDirectory', game),
   ScanDirectory: (game) => ipcRenderer.invoke('ScanDirectory', game),
@@ -39,6 +40,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   RecoverBackup: (data) => ipcRenderer.invoke('RecoverBackup', data),
   CompressBackup: (game, flag) => ipcRenderer.invoke('CompressBackup', game, flag),
   UploadBackup:(game, file) => ipcRenderer.invoke('UploadBackup', game, file),
+  UpdateBigFoot:(game, url) => ipcRenderer.invoke('UpdateBigFoot', game, url),
   
 
   // 获取初始化内容
