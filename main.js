@@ -10,7 +10,8 @@ const {
   UploadBackup,
   GetLocalConfig,
   RecoverBackup,
-  UpdateBigFoot
+  UpdateBigFoot,
+  GetBigFootNewVersion
 } = require('./lib/event')
 const {LoadCheckLogin,Login,Logout} = require('./lib/login')
 const {Test} = require('./lib/http')
@@ -66,6 +67,8 @@ app.whenReady().then(() => {
   ipcMain.handle('UploadBackup', UploadBackup)
   ipcMain.handle('GetLocalConfig', GetLocalConfig)
   ipcMain.handle('UpdateBigFoot', UpdateBigFoot)
+  ipcMain.handle('GetBigFootNewVersion', GetBigFootNewVersion)
+  
   
   // init Store
   Init()

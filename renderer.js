@@ -443,3 +443,16 @@ g("updateBigFoot").addEventListener('click', async () => {
     }
     await window.electronAPI.UpdateBigFoot(DEFAULT_GAME, val)
 })
+
+// 点击获取新版本
+g("getBigFootNewVersion").addEventListener('click', async () => {
+    let result = await window.electronAPI.GetBigFootNewVersion(DEFAULT_GAME, "https://bbs.nga.cn/read.php?tid=33633250&rand=69")
+    if(result.code == 0) {
+        g("bigFootUpdateURL").value = result.newUrl;
+        if (result.currentVersion == result.newVersion) alert("已经是最新版本");
+        if (result.currentVersion != result.newVersion) alert("不是最新版本,可以点击下方按钮更新");
+    } else {
+        console.log( result)
+        alert("不可描述原因, 无法更新")
+    }
+})

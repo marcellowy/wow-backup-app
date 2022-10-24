@@ -41,8 +41,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
   CompressBackup: (game, flag) => ipcRenderer.invoke('CompressBackup', game, flag),
   UploadBackup:(game, file) => ipcRenderer.invoke('UploadBackup', game, file),
   UpdateBigFoot:(game, url) => ipcRenderer.invoke('UpdateBigFoot', game, url),
+  GetBigFootNewVersion:(game, url) => ipcRenderer.invoke('GetBigFootNewVersion', game, url),
   
-
   // 获取初始化内容
   GetLocalConfig: () => ipcRenderer.invoke('GetLocalConfig')
 })
