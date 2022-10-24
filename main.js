@@ -24,10 +24,15 @@ function createWindow () {
     // resizable: false,
     width: 1200,
     height: 800,
+    icon: path.join(__dirname, './icons/png/512x512.png'), 
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     }
   })
+
+  if (process.platform === 'darwin') {
+    app.dock.setIcon(path.join(__dirname, './icons/png/512x512.png'));
+  }
 
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')

@@ -44,14 +44,6 @@ function srefresh(){
                 event.keyCode = 0;
                 event.returnValue = false;
             }
-            // timer = setTimeout(function(){
-            //     alert('恢复刷新');
-            //     if(document.removeEventListener){
-            //         document.removeEventListener('keydown',shieldRefresh);
-            //     }else{
-            //         document.detachEvent('onkeydown',shieldRefresh);
-            //     }
-            // }, 3000);
         }
     }
 }
@@ -400,7 +392,7 @@ async function RecoverBackup(){
 	} else {
 		return;
 	}
-    showModal("正在恢复...")
+    showModal("正在恢复...请耐心等待,时间会比较长")
 
     let id = this.dataset.id;
     let ret = await window.electronAPI.RecoverBackup({
