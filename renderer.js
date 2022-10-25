@@ -85,8 +85,15 @@ function hideModal() {
 
 // 会自动消失的modal
 function autoModal(msg) {
-    showModal(msg + " 3 秒后自动关闭...")
+    let s = 2;
+    showModal(msg + " <span id=\"autoModalId\">3</span> 秒后自动关闭...")
+    let si = setInterval(() => {
+        g("autoModalId").innerText = s;
+        s--;
+    }, 1000);
+
     setTimeout(() => {
+        clearInterval(si);
         hideModal()
     }, 3000);
 }
@@ -449,10 +456,12 @@ g("getBigFootNewVersion").addEventListener('click', async () => {
     let result = await window.electronAPI.GetBigFootNewVersion(DEFAULT_GAME, "https://bbs.nga.cn/read.php?tid=33633250&rand=69")
     if(result.code == 0) {
         g("bigFootUpdateURL").value = result.newUrl;
-        if (result.currentVersion == result.newVersion) alert("已经是最新版本");
-        if (result.currentVersion != result.newVersion) alert("不是最新版本,可以点击下方按钮更新");
+        setTimeout(() => {
+            if (result.currentVersion == result.newVersion) autoModal("已经是最新版本");
+            if (result.currentVersion != result.newVersion) autoModal("不是最新版本,可以点击下方按钮更新");    
+        }, 300);
     } else {
         console.log( result)
-        alert("不可描述原因, 无法更新")
+        autoModal("不可描述原因, 无法更新");
     }
 })
