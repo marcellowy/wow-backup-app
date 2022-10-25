@@ -44,16 +44,13 @@ function createWindow () {
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 
-  mainWindow.on('close', (e) => {
-    // console.log("main window close")
-    if(mainWindow.isVisible()) {
-      e.preventDefault();
-      mainWindow.hide();
+  mainWindow.on('close', (event) => {
+    if(app.quitting) {
+      mainWindow = null // why???
+    } else {
+      event.preventDefault()
+      mainWindow.hide()
     }
-  })
-
-  mainWindow.on('quit', () => {
-    console.log("main window quit")
   })
 
   // 设置一个mainWindow
@@ -92,20 +89,11 @@ app.whenReady().then(() => {
   app.on('activate', function (event, hasVisibleWindows) {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow()
-    } else if (!mainWindow.isVisible()) {
-      mainWindow.show();
-    }
+    // if (BrowserWindow.getAllWindows().length === 0) createWindow()
+    mainWindow.show()
   })
 
-  app.on('will-quit', (event) => {
-    console.log("app will quit")
-  })
-  
-  app.on('quit', (event) => {
-    console.log("app quit")
-  })
+  app.on('before-quit', () => app.quitting = true)
 })
 
 // Quit when all windows are closed, except on macOS. There, it's common
