@@ -18,9 +18,11 @@ const {Test} = require('./lib/http')
 const {GetBackupFromServer, DeleteBackupFromServer} = require('./lib/backup')
 const {Init} = require('./lib/store')
 
+let mainWindow = null;
+
 function createWindow () {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     // frame: false, // 隐藏标题栏
     // titleBarStyle: 'hiddenInset', // 隐藏标题栏,但不隐藏砑角的关闭按钮
     // resizable: false,
@@ -41,6 +43,18 @@ function createWindow () {
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
+
+  mainWindow.on('close', (e) => {
+    // console.log("main window close")
+    if(mainWindow.isVisible()) {
+      e.preventDefault();
+      mainWindow.hide();
+    }
+  })
+
+  mainWindow.on('quit', () => {
+    console.log("main window quit")
+  })
 
   // 设置一个mainWindow
   SetMainWindow(mainWindow)
@@ -75,10 +89,22 @@ app.whenReady().then(() => {
 
   createWindow()
 
-  app.on('activate', function () {
+  app.on('activate', function (event, hasVisibleWindows) {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
-    if (BrowserWindow.getAllWindows().length === 0) createWindow()
+    if (BrowserWindow.getAllWindows().length === 0) {
+      createWindow()
+    } else if (!mainWindow.isVisible()) {
+      mainWindow.show();
+    }
+  })
+
+  app.on('will-quit', (event) => {
+    console.log("app will quit")
+  })
+  
+  app.on('quit', (event) => {
+    console.log("app quit")
   })
 })
 
